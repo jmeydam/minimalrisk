@@ -1,0 +1,76 @@
+{
+  "continents": [
+    {
+      "name": "1", 
+      "countries": [
+        {"name": "11", "player": "A", "count": 1, "modified": false },
+        {"name": "12", "player": "A", "count": 1, "modified": false },
+        {"name": "13", "player": "A", "count": 1, "modified": false },
+        {"name": "14", "player": "A", "count": 1, "modified": false },
+        {"name": "15", "player": "A", "count": 1, "modified": false },
+        {"name": "16", "player": "A", "count": 1, "modified": false },
+        {"name": "17", "player": "A", "count": 1, "modified": false },
+        {"name": "18", "player": "A", "count": 1, "modified": false },
+        {"name": "19", "player": "A", "count": 1, "modified": false }
+      ]
+    }, 
+    {
+      "name": "2", 
+      "countries": [
+        {"name": "21", "player": "B", "count": 1, "modified": false },
+        {"name": "22", "player": "B", "count": 1, "modified": false },
+        {"name": "23", "player": "B", "count": 1, "modified": false },
+        {"name": "24", "player": "B", "count": 1, "modified": false },
+        {"name": "25", "player": "B", "count": 1, "modified": false },
+        {"name": "26", "player": "B", "count": 1, "modified": false },
+        {"name": "27", "player": "B", "count": 1, "modified": false },
+        {"name": "28", "player": "B", "count": 1, "modified": false },
+        {"name": "29", "player": "B", "count": 1, "modified": false }
+      ]
+    }
+  ],
+  "bidirectionalLinks": [
+    {"fromCountry": "11", "toCountry": "12"},
+    {"fromCountry": "12", "toCountry": "13"},
+    {"fromCountry": "14", "toCountry": "15"},
+    {"fromCountry": "15", "toCountry": "16"},
+    {"fromCountry": "17", "toCountry": "18"},
+    {"fromCountry": "18", "toCountry": "19"},
+    {"fromCountry": "11", "toCountry": "14"},
+    {"fromCountry": "14", "toCountry": "17"},
+    {"fromCountry": "12", "toCountry": "15"},
+    {"fromCountry": "15", "toCountry": "18"},
+    {"fromCountry": "13", "toCountry": "16"},
+    {"fromCountry": "16", "toCountry": "19"},
+    {"fromCountry": "14", "toCountry": "18"},
+    {"fromCountry": "11", "toCountry": "15"},
+    {"fromCountry": "15", "toCountry": "19"},
+    {"fromCountry": "12", "toCountry": "16"},
+    {"fromCountry": "12", "toCountry": "14"},
+    {"fromCountry": "13", "toCountry": "15"},
+    {"fromCountry": "15", "toCountry": "17"},
+    {"fromCountry": "16", "toCountry": "18"},
+    {"fromCountry": "21", "toCountry": "22"},
+    {"fromCountry": "22", "toCountry": "23"},
+    {"fromCountry": "24", "toCountry": "25"},
+    {"fromCountry": "25", "toCountry": "26"},
+    {"fromCountry": "27", "toCountry": "28"},
+    {"fromCountry": "28", "toCountry": "29"},
+    {"fromCountry": "21", "toCountry": "24"},
+    {"fromCountry": "24", "toCountry": "27"},
+    {"fromCountry": "22", "toCountry": "25"},
+    {"fromCountry": "25", "toCountry": "28"},
+    {"fromCountry": "23", "toCountry": "26"},
+    {"fromCountry": "26", "toCountry": "29"},
+    {"fromCountry": "24", "toCountry": "28"},
+    {"fromCountry": "21", "toCountry": "25"},
+    {"fromCountry": "25", "toCountry": "29"},
+    {"fromCountry": "22", "toCountry": "26"},
+    {"fromCountry": "22", "toCountry": "24"},
+    {"fromCountry": "23", "toCountry": "25"},
+    {"fromCountry": "25", "toCountry": "27"},
+    {"fromCountry": "26", "toCountry": "28"},
+    {"fromCountry": "16", "toCountry": "24"}
+  ]
+}
+
