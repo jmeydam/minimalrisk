@@ -18,7 +18,7 @@ class Graph extends DirectedGraph {
 
     int nodeCount(String nodeGroup, String player) {
         int count = 0;
-        Set<Node> nodes = this.getAllNodes();
+        Set<Node> nodes = getAllNodes();
         for (Node node : nodes) {
             if (node.getNodeGroup() == nodeGroup && node.getPlayer() == player) {
                 count++;
@@ -27,7 +27,8 @@ class Graph extends DirectedGraph {
         return count;
     } 
 
-    ArrayList<Node> shortestPathBFS(Node start, Node end) {
+    ArrayList<Node> shortestPath(Node start, Node end, String player) {
+        if (start.getPlayer() != player || end.getPlayer() != player) return null; 
         ArrayList<Node> initPath = new ArrayList<>();
         initPath.add(start);
         LinkedList<ArrayList<Node>> pathQueue = new LinkedList<ArrayList<Node>>();
@@ -38,7 +39,8 @@ class Graph extends DirectedGraph {
             if (lastNode == end) {
                 return newPathTrunk;
             }
-            for (Node nextNode : this.childrenOf(lastNode)) {
+            for (Node nextNode : childrenOf(lastNode)) {
+                if (nextNode.getPlayer() != player) continue;
                 if (! newPathTrunk.contains(nextNode)) {
                     ArrayList<Node> newPath = new ArrayList<>();
                     newPath.addAll(newPathTrunk);

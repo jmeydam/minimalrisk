@@ -8,12 +8,14 @@ class Node implements Comparable {
     private final String nodeGroup;
     private String player;
     private int count;
+    private boolean modified;
 
     Node(String name, String nodeGroup, String player, int count) {
         this.name = name;
         this.nodeGroup = nodeGroup;
         this.player = player;
         this.count = count;
+        this.modified = false;
     }
 
     Node(String name, String nodeGroup) {
@@ -40,21 +42,29 @@ class Node implements Comparable {
         return this.count;
     }
 
+    boolean isModfied() {
+        return this.modified;
+    }
+
     void setPlayer(String player) {
         this.player = player;
+        this.modified = true;
     }
 
     void setCount(int count) {
         this.count = count;
+        this.modified = true;
     }
 
     void incrementCount() {
         this.count += 1;
+        this.modified = true;
     }
 
     void decrementCount() {
         if (this.count > 0) {
             this.count -= 1;
+            this.modified = true;
         }
     }
 

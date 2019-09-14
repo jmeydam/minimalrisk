@@ -9,6 +9,16 @@ import java.nio.charset.StandardCharsets;
 
 class GsonTest {
 
+    /*
+    jenss-macbook-air:minimalrisk jensmeydam$ export CLASSPATH=.:gson-2.8.5.jar
+    jenss-macbook-air:minimalrisk jensmeydam$ echo $CLASSPATH
+    .:gson-2.8.5.jar
+    jenss-macbook-air:minimalrisk jensmeydam$ javac com/example/minimalrisk/GsonTest.java
+    jenss-macbook-air:minimalrisk jensmeydam$ java com/example/minimalrisk/GsonTest
+    OK!
+    jenss-macbook-air:minimalrisk jensmeydam$ 
+    */
+
     public static void main(String[] args) throws IOException {
         System.out.println("Gson with template object:");
         // country_graph_init.json

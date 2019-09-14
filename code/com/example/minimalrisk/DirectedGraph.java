@@ -51,7 +51,7 @@ class DirectedGraph {
 
     Set<String> getAllNodeGroups() {
         HashSet<String> nodeGroupSet = new HashSet<>();
-        for (Node node : this.getAllNodes()) {
+        for (Node node : getAllNodes()) {
             nodeGroupSet.add(node.getNodeGroup());
         }
         return nodeGroupSet;
@@ -59,7 +59,7 @@ class DirectedGraph {
 
     Set<String> getAllPlayers() {
         HashSet<String> playerSet = new HashSet<>();
-        for (Node node : this.getAllNodes()) {
+        for (Node node : getAllNodes()) {
             playerSet.add(node.getPlayer());
         }
         return playerSet;
