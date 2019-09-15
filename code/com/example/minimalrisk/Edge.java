@@ -20,6 +20,10 @@ class Edge implements Comparable<Edge> {
         return this.destination;
     }
 
+    Edge reverse() {
+        return new Edge(this.destination, this.source);
+    }
+
     public String toString() {
         return this.source.getName() + " -> " + this.destination.getName();
     }

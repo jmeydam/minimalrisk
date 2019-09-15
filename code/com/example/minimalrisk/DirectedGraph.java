@@ -50,6 +50,16 @@ class DirectedGraph {
         return this.edges.keySet();
     }
 
+    Set<Node> getAllNodes(String nodeGroup) {
+        HashSet<Node> nodeSet = new HashSet<>();
+        for (Node node : getAllNodes()) {
+            if (Objects.equals(node.getNodeGroup(), nodeGroup)) { 
+                nodeSet.add(node);
+            }
+        }
+        return nodeSet;
+    }
+
     Set<String> getAllNodeGroups() {
         HashSet<String> nodeGroupSet = new HashSet<>();
         for (Node node : getAllNodes()) {
@@ -64,6 +74,16 @@ class DirectedGraph {
             playerSet.add(node.getPlayer());
         }
         return playerSet;
+    }
+
+    Set<Edge> getAllEdges() {
+        HashSet<Edge> edgeSet = new HashSet<>();
+        for (Node source : getAllNodes()) {
+            for (Node destination : childrenOf(source)) {
+                edgeSet.add(new Edge(source, destination)); 
+            }
+        }
+        return edgeSet;
     }
 
 }

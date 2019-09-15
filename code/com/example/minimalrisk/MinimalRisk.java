@@ -1,5 +1,6 @@
 package com.example.minimalrisk;
 
+import java.nio.charset.StandardCharsets;
 import com.google.gson.Gson;
 import com.example.minimalrisk.GsonTemplateCountryGraph;
 import com.example.minimalrisk.GsonTemplateCountryList;
@@ -21,17 +22,18 @@ public class MinimalRisk {
      * @return String with JSON representation of country graph (same structure as parameter countryGraphJSON)
      */
     public static String initialAllocationOfCountries(String countryGraphJSON, String playerA, String playerB) {
-        Gson gson = new Gson();
-        GsonTemplateCountryGraph countryGraphObject = gson.fromJson(countryGraphJSON, GsonTemplateCountryGraph.class);
-        String json = gson.toJson(countryGraphObject);
-        return countryGraphJSON;
+        Board board = new Board(countryGraphJSON);
+        board.initialAllocationOfCountries(playerA, playerB);
+        return board.getCountryGraphJSON();
     }
 
     /**
      * @return String with JSON representation of country graph (same structure as parameter countryGraphJSON)
      */
     public static String initialAllocationOfExtraTroops(String countryGraphJSON, int extraTroopsEach) {
-        return countryGraphJSON;
+        Board board = new Board(countryGraphJSON);
+        board.initialAllocationOfExtraTroops(6);
+        return board.getCountryGraphJSON();
     }
 
 

@@ -9,16 +9,24 @@ public class MinimalRiskTestdriveStateless {
 
     public static void main(String[] args) {
         try {
-            System.out.println("Reading country_graph_init.json");
-            Path path = FileSystems.getDefault().getPath("country_graph_init.json");
-            String initialConfig = Files.readString(path, StandardCharsets.UTF_8);
-            System.out.println(initialConfig);
-            String initialAllocation = MinimalRisk.initialAllocationOfCountries(initialConfig, "A", "B");
-            System.out.println(initialAllocation);
+            String initConfigFile = "country_graph_init.json";
+
+            System.out.println("Reading " + initConfigFile);
+            Path path = FileSystems.getDefault().getPath(initConfigFile);
+            String countryGraph = Files.readString(path, StandardCharsets.UTF_8);
+
+            System.out.println("Initial configuration of board");
+            System.out.println(countryGraph);
+
+            countryGraph = MinimalRisk.initialAllocationOfCountries(countryGraph, "A", "B");
+            System.out.println("Initial allocation of countries");
+            System.out.println(countryGraph);
             
+            countryGraph = MinimalRisk.initialAllocationOfExtraTroops(countryGraph, 6);
+            System.out.println("Initial allocation of extra troops");
+            System.out.println(countryGraph);
+
             /*
-            board = new Board();
-            board.initialAllocationOfCountries("A", "B");
             System.out.println("\nInitial allocation of extra troops ...\n");
             board.initialAllocationOfExtraTroops(6);
             board.printNodes();

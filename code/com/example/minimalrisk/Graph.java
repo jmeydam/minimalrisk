@@ -2,6 +2,7 @@ package com.example.minimalrisk;
 
 import java.util.Objects;
 import java.util.Set;
+import java.util.HashSet;
 import java.util.ArrayList;
 import java.util.LinkedList;
 
@@ -28,6 +29,16 @@ class Graph extends DirectedGraph {
         return count;
     } 
 
+    Set<Edge> getAllBidirectionalLinks() {
+        HashSet<Edge> bidirectionalLinkSet = new HashSet<>();
+        for (Edge e : getAllEdges()) {
+            if (! bidirectionalLinkSet.contains(e) && ! bidirectionalLinkSet.contains(e.reverse())) {
+                bidirectionalLinkSet.add(e); 
+            }
+        }
+        return bidirectionalLinkSet;
+    }
+    
     ArrayList<Node> shortestPath(Node start, Node end, String player) {
         if (start.getPlayer() != player || end.getPlayer() != player) return null; 
         ArrayList<Node> initPath = new ArrayList<>();

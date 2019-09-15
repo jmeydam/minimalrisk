@@ -24,7 +24,7 @@ class Board {
         GsonTemplateCountryGraph countryGraphObject = gson.fromJson(countryGraphString, GsonTemplateCountryGraph.class);
         for (GsonTemplateContinent continent : countryGraphObject.continents) {
             for (GsonTemplateCountry country : continent.countries) {
-                this.g.addNode(new Node(country.name, continent.name));
+                this.g.addNode(new Node(country.name, continent.name, country.player, country.count));
             }
         }
         for (GsonTemplateBidirectionalLink link : countryGraphObject.bidirectionalLinks) {
@@ -40,6 +40,31 @@ class Board {
         Path path = FileSystems.getDefault().getPath("country_graph_init.json");
         String countryGraphString = Files.readString(path, StandardCharsets.UTF_8);
         return countryGraphString;
+    }
+
+    static String getCountryListJSON(ArrayList<Node> nodes) {
+        GsonTemplateCountryList countryListObject = new GsonTemplateCountryList();
+        for (Node n : nodes) {
+            countryListObject.countries.add(new GsonTemplateCountry(n.getName(), n.getPlayer(), n.getCount(), n.isModified()));
+        }
+        Gson gson = new Gson();
+        return gson.toJson(countryListObject);
+    }
+
+    String getCountryGraphJSON() {
+        GsonTemplateCountryGraph countryGraphObject = new GsonTemplateCountryGraph();
+        for (String continentName : g.getAllNodeGroups()) {
+            ArrayList<GsonTemplateCountry> countries = new ArrayList<>();
+            for (Node n : g.getAllNodes(continentName)) {
+                countries.add(new GsonTemplateCountry(n.getName(), n.getPlayer(), n.getCount(), n.isModified()));
+            }
+            countryGraphObject.continents.add(new GsonTemplateContinent(continentName, countries));
+        }                        
+        for (Edge e : g.getAllBidirectionalLinks()) {
+            countryGraphObject.bidirectionalLinks.add(new GsonTemplateBidirectionalLink(e.getSource().getName(), e.getDestination().getName())); 
+        }                        
+        Gson gson = new Gson();
+        return gson.toJson(countryGraphObject);
     }
 
     boolean gameOver() {

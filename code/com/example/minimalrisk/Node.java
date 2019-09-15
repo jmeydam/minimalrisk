@@ -42,7 +42,7 @@ class Node implements Comparable<Node> {
         return this.count;
     }
 
-    boolean isModfied() {
+    boolean isModified() {
         return this.modified;
     }
 
