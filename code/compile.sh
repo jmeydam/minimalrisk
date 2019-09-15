@@ -19,8 +19,8 @@ javac com/example/minimalrisk/MinimalRiskTest.java
 javac com/example/minimalrisk/GsonTemplateCountry.java
 javac com/example/minimalrisk/GsonTemplateContinent.java
 javac com/example/minimalrisk/GsonTemplateBidirectionalLink.java
-javac com/example/minimalrisk/GsonTemplate.java
-javac com/example/minimalrisk/GsonTest.java
+javac com/example/minimalrisk/GsonTemplateCountryGraph.java
+javac com/example/minimalrisk/GsonTemplateCountryList.java
 javac GsonTest.java
 
 echo Done.

@@ -21,7 +21,7 @@ class Board {
     Board(String countryGraphString) {
         this.g = new Graph();
         Gson gson = new Gson();
-        GsonTemplate countryGraphObject = gson.fromJson(countryGraphString, GsonTemplate.class);
+        GsonTemplateCountryGraph countryGraphObject = gson.fromJson(countryGraphString, GsonTemplateCountryGraph.class);
         for (GsonTemplateContinent continent : countryGraphObject.continents) {
             for (GsonTemplateCountry country : continent.countries) {
                 this.g.addNode(new Node(country.name, continent.name));

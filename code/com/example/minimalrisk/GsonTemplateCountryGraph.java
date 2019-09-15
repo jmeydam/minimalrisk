@@ -3,12 +3,12 @@ package com.example.minimalrisk;
 import java.util.ArrayList;
 import com.google.gson.Gson;
 
-public class GsonTemplate {
+public class GsonTemplateCountryGraph {
 
     public ArrayList<GsonTemplateContinent> continents;
     public ArrayList<GsonTemplateBidirectionalLink> bidirectionalLinks;
 
-    public GsonTemplate() {
+    public GsonTemplateCountryGraph() {
 
         // continent 1
         ArrayList<GsonTemplateCountry> countries1 = new ArrayList<>();

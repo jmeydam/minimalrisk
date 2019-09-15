@@ -9,9 +9,6 @@ echo $CLASSPATH
 
 echo Running Gson tests ...
 
-echo In package com/example/minimalrisk:
-java com/example/minimalrisk/GsonTest
-echo In working directory:
 java GsonTest
 
 echo Done.

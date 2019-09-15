@@ -5,6 +5,15 @@ package com.example.minimalrisk;
  */
 public class MinimalRisk {
 
+    private static String countryListExampleJson = 
+        "{\n"
+      + "  \"countries\": [\n"
+      + "    {\"name\": \"11\", \"player\": \"A\", \"count\": 1, \"modified\": false },\n"
+      + "    {\"name\": \"12\", \"player\": \"A\", \"count\": 1, \"modified\": false },\n"
+      + "    {\"name\": \"13\", \"player\": \"A\", \"count\": 1, \"modified\": false }\n"
+      + "  ]\n"
+      + "}\n";
+
     // initialization
 
     /**
@@ -17,7 +26,7 @@ public class MinimalRisk {
     /**
      * @return String with JSON representation of country graph (same structure as parameter countryGraphJSON)
      */
-    public static String initialAllocationOfExtraTroops(String countryGraphJSON, int extraTroops) {
+    public static String initialAllocationOfExtraTroops(String countryGraphJSON, int extraTroopsEach) {
         return countryGraphJSON;
     }
 
@@ -50,6 +59,13 @@ public class MinimalRisk {
     }
     
     /**
+    * @return String with JSON representation of country graph (same structure as parameter countryGraphJSON)
+    */
+    public static String moveTroops(String countryGraphJSON, String player, int troops) {
+        return countryGraphJSON;
+    }
+
+    /**
     * @return true if one player has captured a whole continent
     */
     public static boolean gameOver(String countryGraphJSON) {
@@ -63,14 +79,21 @@ public class MinimalRisk {
     * @return String with JSON representation of list of countries
     */
     public static String possibleTargetCountries(String countryGraphJSON, String attackingPlayer) {
-        return "[\"11\", \"12\", \"13\"]";
+        return countryListExampleJson;
+    }
+
+    /**
+    * @return String with JSON representation of list of countries
+    */
+    public static String possibleTargetCountries(String countryGraphJSON, String attackingPlayer, String attackingCountry) {
+        return countryListExampleJson;
     }
 
     /**
     * @return String with JSON representation of list of countries
     */
     public static String possibleAttackingCountries(String countryGraphJSON, String attackingPlayer, String targetCountry) {
-        return "[\"11\", \"12\", \"13\"]";
+        return countryListExampleJson;
     }
 
     /**
@@ -87,21 +110,35 @@ public class MinimalRisk {
     * @return String with JSON representation of list of countries
     */
     public static String possibleDestinations(String countryGraphJSON, String player) {
-        return "[\"11\", \"12\", \"13\"]";
+        return countryListExampleJson;
+    }
+
+    /**
+    * @return String with JSON representation of list of countries
+    */
+    public static String possibleDestinations(String countryGraphJSON, String player, String sourceCountry) {
+        return countryListExampleJson;
     }
 
     /**
     * @return String with JSON representation of list of countries
     */
     public static String possibleSources(String countryGraphJSON, String player) {
-        return "[\"11\", \"12\", \"13\"]";
+        return countryListExampleJson;
     }
 
     /**
     * @return String with JSON representation of list of countries
     */
-    public static String shortestPath(String countryGraphJSON, String from, String to, String player) {
-        return "[\"11\", \"12\", \"13\"]";
+    public static String possibleSources(String countryGraphJSON, String player, String destinationCountry) {
+        return countryListExampleJson;
+    }
+
+    /**
+    * @return String with JSON representation of list of countries
+    */
+    public static String shortestPath(String countryGraphJSON, String player, String sourceCountry, String destinationCountry) {
+        return countryListExampleJson;
     }
 
 }
