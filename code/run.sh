@@ -11,5 +11,5 @@ echo Running simulation ...
 
 java com/example/minimalrisk/MinimalRiskTest
 
-echon Done.
+echo Done.
 
