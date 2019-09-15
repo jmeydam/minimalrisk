@@ -1,8 +1,9 @@
 package com.example.minimalrisk;
 
-/**
- * TODO add comment
- */
+import com.google.gson.Gson;
+import com.example.minimalrisk.GsonTemplateCountryGraph;
+import com.example.minimalrisk.GsonTemplateCountryList;
+
 public class MinimalRisk {
 
     private static String countryListExampleJson = 
@@ -20,6 +21,9 @@ public class MinimalRisk {
      * @return String with JSON representation of country graph (same structure as parameter countryGraphJSON)
      */
     public static String initialAllocationOfCountries(String countryGraphJSON, String playerA, String playerB) {
+        Gson gson = new Gson();
+        GsonTemplateCountryGraph countryGraphObject = gson.fromJson(countryGraphJSON, GsonTemplateCountryGraph.class);
+        String json = gson.toJson(countryGraphObject);
         return countryGraphJSON;
     }
 

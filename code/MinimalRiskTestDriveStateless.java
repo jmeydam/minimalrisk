@@ -11,7 +11,11 @@ public class MinimalRiskTestdriveStateless {
         try {
             System.out.println("Reading country_graph_init.json");
             Path path = FileSystems.getDefault().getPath("country_graph_init.json");
-            String countryGraphString = Files.readString(path, StandardCharsets.UTF_8);
+            String initialConfig = Files.readString(path, StandardCharsets.UTF_8);
+            System.out.println(initialConfig);
+            String initialAllocation = MinimalRisk.initialAllocationOfCountries(initialConfig, "A", "B");
+            System.out.println(initialAllocation);
+            
             /*
             board = new Board();
             board.initialAllocationOfCountries("A", "B");
