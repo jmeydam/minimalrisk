@@ -1,9 +1,10 @@
 package com.example.minimalrisk;
 
+import java.util.Objects;
 import java.util.Set;
+import java.util.HashSet;
 import java.util.Map;
 import java.util.HashMap;
-import java.util.HashSet;
 
 class DirectedGraph {
 
@@ -38,7 +39,7 @@ class DirectedGraph {
 
     Node getNode(String name) {
         for (Node node : this.edges.keySet()) {
-            if (node.getName() == name) {
+            if (Objects.equals(node.getName(), name)) {
                 return node;
             }
         }

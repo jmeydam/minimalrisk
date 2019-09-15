@@ -2,7 +2,7 @@ package com.example.minimalrisk;
 
 import java.util.Objects;
 
-class Edge implements Comparable {
+class Edge implements Comparable<Edge> {
     
     private final Node source; 
     private final Node destination;
@@ -36,8 +36,7 @@ class Edge implements Comparable {
         return this.source == other.source && this.destination == other.destination;
     }
 
-    public int compareTo(Object otherObject) {
-        Edge other = (Edge) otherObject;
+    public int compareTo(Edge other) {
         int i = this.source.compareTo(other.source);
         if (i != 0) {
             return i;

@@ -1,8 +1,9 @@
 package com.example.minimalrisk;
 
+import java.util.Objects;
+import java.util.Set;
 import java.util.ArrayList;
 import java.util.LinkedList;
-import java.util.Set;
 
 class Graph extends DirectedGraph {
 
@@ -20,7 +21,7 @@ class Graph extends DirectedGraph {
         int count = 0;
         Set<Node> nodes = getAllNodes();
         for (Node node : nodes) {
-            if (node.getNodeGroup() == nodeGroup && node.getPlayer() == player) {
+            if (Objects.equals(node.getNodeGroup(), nodeGroup) && Objects.equals(node.getPlayer(), player)) {
                 count++;
             }
         }
@@ -49,7 +50,7 @@ class Graph extends DirectedGraph {
                 }
             }
         }
-        return null;
+        return new ArrayList<>();
     }
 
 }

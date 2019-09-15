@@ -1,11 +1,11 @@
 package com.example.minimalrisk;
 
-class GsonTemplateBidirectionalLink {
+public class GsonTemplateBidirectionalLink {
 
-    String fromCountry;
-    String toCountry;
+    public String fromCountry;
+    public String toCountry;
 
-    GsonTemplateBidirectionalLink(String fromCountry, String toCountry) {
+    public GsonTemplateBidirectionalLink(String fromCountry, String toCountry) {
         this.fromCountry = fromCountry;
         this.toCountry = toCountry;
     }

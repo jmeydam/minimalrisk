@@ -2,7 +2,7 @@ package com.example.minimalrisk;
 
 import java.util.Objects;
 
-class Node implements Comparable {
+class Node implements Comparable<Node> {
 
     private final String name; // precondition: must be unique
     private final String nodeGroup;
@@ -81,11 +81,10 @@ class Node implements Comparable {
         if (otherObject == null) return false;
         if (this.getClass() != otherObject.getClass()) return false;
         Node other = (Node) otherObject;
-        return this.name == other.name;
+        return Objects.equals(this.name, other.name);
     }
 
-    public int compareTo(Object otherObject) {
-        Node other = (Node) otherObject;
+    public int compareTo(Node other) {
         int i = this.nodeGroup.compareTo(other.nodeGroup);
         if (i != 0) {
             return i;

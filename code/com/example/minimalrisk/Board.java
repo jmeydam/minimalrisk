@@ -1,16 +1,18 @@
 package com.example.minimalrisk;
 
-import com.google.gson.Gson;
+import java.util.Objects;
+import java.util.Collections;
+import java.util.Set;
+import java.util.HashSet;
+import java.util.List;
+import java.util.ArrayList;
+import java.util.Random;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.FileSystems;
 import java.nio.file.Path;
 import java.nio.charset.StandardCharsets;
-import java.util.Collections;
-import java.util.Set;
-import java.util.HashSet;
-import java.util.ArrayList;
-import java.util.Random;
+import com.google.gson.Gson;
 
 class Board {
 
@@ -80,7 +82,7 @@ class Board {
         Set<Node> nodes = this.g.getAllNodes();
         ArrayList<Node> nodesPlayer = new ArrayList<>();
         for (Node node : nodes) {
-            if (node.getPlayer() == player) {
+            if (Objects.equals(node.getPlayer(), player)) {
                 nodesPlayer.add(node);
             }
         }
@@ -104,7 +106,7 @@ class Board {
         ArrayList<Node> possibleAttackingCountries = new ArrayList<>(); 
         HashSet<Node> neighbors = this.g.childrenOf(targetCountry);
         for (Node neighbor : neighbors) {
-            if (neighbor.getPlayer() == attackingPlayer && neighbor.getCount() > 1) {
+            if (Objects.equals(neighbor.getPlayer(), attackingPlayer) && neighbor.getCount() > 1) {
                 possibleAttackingCountries.add(neighbor);
             }
         }
@@ -137,7 +139,7 @@ class Board {
         String[] players = {attackingCountry.getPlayer(), targetCountry.getPlayer()};
         int randomIndex = randomGenerator.nextInt(players.length);
         String winner = players[randomIndex];
-        if (winner == attackingCountry.getPlayer()) {
+        if (Objects.equals(winner, attackingCountry.getPlayer())) {
             targetCountry.setPlayer(winner);
         }
     }
@@ -152,7 +154,6 @@ class Board {
             if (possibleAttackingCountries.size() > 0)  {
                 randomIndex = randomGenerator.nextInt(possibleAttackingCountries.size());
                 Node attackingCountry = possibleAttackingCountries.get(randomIndex);
-                // attack always with maximum number of allowable troops
                 battle(attackingCountry, targetCountry);
             }
         }
@@ -162,7 +163,7 @@ class Board {
         ArrayList<Node> possibleSources = new ArrayList<>() ;
         Set<Node> nodes = this.g.getAllNodes();
         for (Node node : nodes) {
-            if (node.getPlayer() == movingPlayer && node.getCount() > 1) {
+            if (Objects.equals(node.getPlayer(), movingPlayer) && node.getCount() > 1) {
                 possibleSources.add(node);
             }
         }
@@ -173,7 +174,7 @@ class Board {
         ArrayList<Node> possibleDestinations = new ArrayList<>() ;
         Set<Node> nodes = this.g.getAllNodes();
         for (Node node : nodes) {
-            if (node.getPlayer() == movingPlayer) {
+            if (Objects.equals(node.getPlayer(), movingPlayer)) {
                 possibleDestinations.add(node);
             }
         }
@@ -212,6 +213,17 @@ class Board {
         allocationOfExtraTroops(player, 2);
         attack(player);
         moveTroops(player);
+    }
+
+    void printNodes() {
+        System.out.println("\nNodes:\n");
+        Set<Node> nodes = this.g.getAllNodes();
+        List<Node> nodeList = new ArrayList<>(nodes);
+        Collections.sort(nodeList);
+        for (Node node : nodeList) {
+            System.out.println(node);
+        }
+        System.out.println("\n");
     }
 
 }

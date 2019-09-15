@@ -1,13 +1,13 @@
 package com.example.minimalrisk;
 
-class GsonTemplateCountry {
+public class GsonTemplateCountry {
 
-    String name;
-    String player;
-    int count;
-    boolean modified;
+    public String name;
+    public String player;
+    public int count;
+    public boolean modified;
 
-    GsonTemplateCountry(String name, String player, int count, boolean modified) {
+    public GsonTemplateCountry(String name, String player, int count, boolean modified) {
         this.name = name;
         this.player = player;
         this.count = count;

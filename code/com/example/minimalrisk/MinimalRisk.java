@@ -100,7 +100,7 @@ public class MinimalRisk {
     /**
     * @return String with JSON representation of list of countries
     */
-    public static String shortestPath(String countryGraphJSON, String from, String to) {
+    public static String shortestPath(String countryGraphJSON, String from, String to, String player) {
         return "[\"11\", \"12\", \"13\"]";
     }
 
