@@ -1,6 +1,6 @@
 package com.example.minimalrisk;
 
-public class MinimalRiskTest {
+public class MinimalRiskTestdriveStateful {
 
     public static void main(String[] args) {
         Board board;

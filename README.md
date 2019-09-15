@@ -6,6 +6,6 @@ cd code
 export CLASSPATH=.:gson-2.8.5.jar
 ./compile.sh
 ./test_gson.sh
-./run.sh
+./testdrive_stateless.sh
 ```
 

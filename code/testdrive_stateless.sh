@@ -9,7 +9,7 @@ echo $CLASSPATH
 
 echo Running simulation ...
 
-java com/example/minimalrisk/MinimalRiskTest
+java MinimalRiskTestdriveStateless
 
 echo Done.
 
