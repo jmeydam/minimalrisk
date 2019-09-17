@@ -215,15 +215,10 @@ class Board {
         return possibleDestinations;
     }
 
-    ArrayList<String> shortestPath(String fromName, String toName, String player) {
+    ArrayList<Node> shortestPath(String fromName, String toName, String player) {
         Node fromNode = this.g.getNode(fromName);
         Node toNode = this.g.getNode(toName);
-        ArrayList<Node> nodeList = this.g.shortestPath(fromNode, toNode, player);
-        ArrayList<String> stringList = new ArrayList<>(); 
-        for (Node node : nodeList) {
-            stringList.add(node.getName());
-        }
-        return stringList;
+        return this.g.shortestPath(fromNode, toNode, player);
     }
 
     void moveTroops(String player) {
@@ -247,6 +242,10 @@ class Board {
         allocationOfExtraTroops(player, 2);
         attack(player);
         moveTroops(player);
+    }
+
+    Node getNode(String name) {
+        return this.g.getNode(name);
     }
 
     void printNodes() {
