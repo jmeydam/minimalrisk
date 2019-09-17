@@ -1,5 +1,7 @@
 package com.example.minimalrisk;
 
+import java.util.ArrayList;
+
 public class MinimalRisk {
 
     /**
@@ -63,7 +65,7 @@ public class MinimalRisk {
     */
     public static String possibleTargetCountries(String countryGraphJSON, String attackingPlayer) {
         Board board = new Board(countryGraphJSON);
-        ArrayList<Node> possibleTargetCountries board.possibleTargetCountries(attackingPlayer);
+        ArrayList<Node> possibleTargetCountries = board.possibleTargetCountries(attackingPlayer);
         return Board.getCountryListJSON(possibleTargetCountries);
     }
 
@@ -73,7 +75,7 @@ public class MinimalRisk {
     public static String possibleTargetCountries(String countryGraphJSON, String attackingPlayer, String attackingCountry) {
         Board board = new Board(countryGraphJSON);
         // TODO
-        ArrayList<Node> possibleTargetCountries board.possibleTargetCountries(attackingPlayer);
+        ArrayList<Node> possibleTargetCountries = board.possibleTargetCountries(attackingPlayer);
         return Board.getCountryListJSON(possibleTargetCountries);
     }
 
@@ -82,7 +84,7 @@ public class MinimalRisk {
     */
     public static String possibleAttackingCountries(String countryGraphJSON, String attackingPlayer, String targetCountry) {
         Board board = new Board(countryGraphJSON);
-        ArrayList<Node> possibleAttackingCountries board.possibleAttackingCountries(attackingPlayer, board.getNode(targetCountry));
+        ArrayList<Node> possibleAttackingCountries = board.possibleAttackingCountries(attackingPlayer, board.getNode(targetCountry));
         return Board.getCountryListJSON(possibleAttackingCountries);
     }
 
