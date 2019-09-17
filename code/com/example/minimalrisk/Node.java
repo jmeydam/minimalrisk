@@ -56,6 +56,10 @@ class Node implements Comparable<Node> {
         this.modified = true;
     }
 
+    void resetModified() {
+        this.modified = false;
+    }
+
     void incrementCount() {
         this.count += 1;
         this.modified = true;

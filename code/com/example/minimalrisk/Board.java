@@ -67,11 +67,22 @@ class Board {
         return gson.toJson(countryGraphObject);
     }
 
+    void resetModified() {
+        Set<Node> nodes = this.g.getAllNodes();
+        for (Node node : nodes) {
+            node.resetModified();
+        }
+    }
+
     boolean gameOver() {
+        // System.out.println("game over?");
         Set<String> nodeGroups = this.g.getAllNodeGroups();
         Set<String> players =  this.g.getAllPlayers(); 
+        // System.out.println("node groups: " + nodeGroups);
+        // System.out.println("players: " + players);
         for (String nodeGroup : nodeGroups) {
             for (String player : players) {
+                // System.out.println("node count " + nodeGroup + ", " + player + ": " + this.g.nodeCount(nodeGroup, player));
                 if (this.g.nodeCount(nodeGroup, player) == 0) {
                     return true;
                 }
@@ -103,6 +114,7 @@ class Board {
     }
 
     void allocationOfExtraTroops(String player, int extraTroops) {
+        // System.out.println("allocating " + extraTroops + " troops to " + player);
         Random randomGenerator = new Random();
         Set<Node> nodes = this.g.getAllNodes();
         ArrayList<Node> nodesPlayer = new ArrayList<>();
@@ -115,7 +127,9 @@ class Board {
             for (int i = 0; i < extraTroops; i++) {
                 int randomIndex = randomGenerator.nextInt(nodesPlayer.size());
                 Node node = nodesPlayer.get(randomIndex);
+                // System.out.println("old count node " + node.getName() + ": " + node.getCount());
                 node.incrementCount();
+                // System.out.println("new count node " + node.getName() + ": " + node.getCount());
             }
         }
     }
@@ -130,7 +144,9 @@ class Board {
     ArrayList<Node> possibleAttackingCountries(String attackingPlayer, Node targetCountry) {
         ArrayList<Node> possibleAttackingCountries = new ArrayList<>(); 
         HashSet<Node> neighbors = this.g.childrenOf(targetCountry);
+        // System.out.println("neighbors of target country " + targetCountry + ": " + neighbors);
         for (Node neighbor : neighbors) {
+            // System.out.println("Objects.equals(neighbor.getPlayer(), attackingPlayer): " + Objects.equals(neighbor.getPlayer(), attackingPlayer));
             if (Objects.equals(neighbor.getPlayer(), attackingPlayer) && neighbor.getCount() > 1) {
                 possibleAttackingCountries.add(neighbor);
             }
@@ -143,10 +159,11 @@ class Board {
         ArrayList<Node> enemyCountries = new ArrayList<>(); 
         Set<Node> nodes = this.g.getAllNodes();
         for (Node node : nodes) {
-            if (node.getPlayer() != attackingPlayer) {
+            if (! Objects.equals(node.getPlayer(), attackingPlayer)) {
                 enemyCountries.add(node);
             }
         }
+        // System.out.println("possibe target countries, candidates: " + enemyCountries);
         for (Node enemyCountry : enemyCountries) {
             ArrayList<Node> possibleAttackingCountries = possibleAttackingCountries(attackingPlayer, enemyCountry);
             if (possibleAttackingCountries.size() > 0) {
@@ -157,6 +174,7 @@ class Board {
     }
 
     void battle(Node attackingCountry, Node targetCountry) {
+        // System.out.println("battle: " + attackingCountry.getName() + " is attacking " + targetCountry.getName());
         Random randomGenerator = new Random();
         attackingCountry.setCount(1);
         // later different counts possible
@@ -170,15 +188,21 @@ class Board {
     }
 
     void attack(String attackingPlayer) {
+        // System.out.println(attackingPlayer + " attacking");
         Random randomGenerator = new Random();
         ArrayList<Node> possibleTargetCountries = possibleTargetCountries(attackingPlayer);
+        // System.out.println("possible target countries: " + possibleTargetCountries);
         if (possibleTargetCountries.size() > 0) {
             int randomIndex = randomGenerator.nextInt(possibleTargetCountries.size());
             Node targetCountry = possibleTargetCountries.get(randomIndex);
+            // System.out.println("target country: " + targetCountry);
             ArrayList<Node> possibleAttackingCountries = possibleAttackingCountries(attackingPlayer, targetCountry);
+            // System.out.println("possible attacking countries for target country " + targetCountry + ": " + possibleAttackingCountries);
             if (possibleAttackingCountries.size() > 0)  {
                 randomIndex = randomGenerator.nextInt(possibleAttackingCountries.size());
                 Node attackingCountry = possibleAttackingCountries.get(randomIndex);
+                // System.out.println("attacking country: " + attackingCountry);
+                // System.out.println("battle " + attackingCountry + " against " + targetCountry);
                 battle(attackingCountry, targetCountry);
             }
         }
@@ -241,14 +265,14 @@ class Board {
     }
 
     void printNodes() {
-        System.out.println("\nNodes:\n");
+        // System.out.println("\nNodes:\n");
         Set<Node> nodes = this.g.getAllNodes();
         List<Node> nodeList = new ArrayList<>(nodes);
         Collections.sort(nodeList);
         for (Node node : nodeList) {
-            System.out.println(node);
+            // System.out.println(node);
         }
-        System.out.println("\n");
+        // System.out.println("\n");
     }
 
 }

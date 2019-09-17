@@ -40,8 +40,8 @@ class Graph extends DirectedGraph {
     }
     
     ArrayList<Node> shortestPath(Node start, Node end, String player) {
-        if (start.getPlayer() != player || end.getPlayer() != player) return null; 
         ArrayList<Node> initPath = new ArrayList<>();
+        if (! (Objects.equals(start.getPlayer(), player) && Objects.equals(end.getPlayer(), player))) return initPath;
         initPath.add(start);
         LinkedList<ArrayList<Node>> pathQueue = new LinkedList<ArrayList<Node>>();
         pathQueue.add(initPath);
@@ -52,7 +52,7 @@ class Graph extends DirectedGraph {
                 return newPathTrunk;
             }
             for (Node nextNode : childrenOf(lastNode)) {
-                if (nextNode.getPlayer() != player) continue;
+                if (! Objects.equals(nextNode.getPlayer(), player)) continue;
                 if (! newPathTrunk.contains(nextNode)) {
                     ArrayList<Node> newPath = new ArrayList<>();
                     newPath.addAll(newPathTrunk);

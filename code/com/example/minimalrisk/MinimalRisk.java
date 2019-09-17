@@ -47,21 +47,30 @@ public class MinimalRisk {
     * @return String with JSON representation of country graph (same structure as parameter countryGraphJSON)
     */
     public static String allocationOfExtraTroops(String countryGraphJSON, String player, int extraTroops) {
-        return countryGraphJSON;
+        Board board = new Board(countryGraphJSON);
+        board.resetModified();
+        board.allocationOfExtraTroops(player, 2);
+        return board.getCountryGraphJSON();
     }
 
     /**
     * @return String with JSON representation of country graph (same structure as parameter countryGraphJSON)
     */
     public static String attack(String countryGraphJSON, String attackingPlayer) {
-        return countryGraphJSON;
+        Board board = new Board(countryGraphJSON);
+        board.resetModified();
+        board.attack(attackingPlayer);
+        return board.getCountryGraphJSON();
     }
 
     /**
     * @return String with JSON representation of country graph (same structure as parameter countryGraphJSON)
     */
     public static String moveTroops(String countryGraphJSON, String player) {
-        return countryGraphJSON;
+        Board board = new Board(countryGraphJSON);
+        board.resetModified();
+        board.moveTroops(player);
+        return board.getCountryGraphJSON();
     }
     
     /**
@@ -75,7 +84,8 @@ public class MinimalRisk {
     * @return true if one player has captured a whole continent
     */
     public static boolean gameOver(String countryGraphJSON) {
-        return false;
+        Board board = new Board(countryGraphJSON);
+        return board.gameOver();
     }
 
 

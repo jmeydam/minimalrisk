@@ -26,30 +26,31 @@ public class MinimalRiskTestdriveStateless {
             System.out.println("Initial allocation of extra troops");
             System.out.println(countryGraph);
 
-            /*
-            System.out.println("\nInitial allocation of extra troops ...\n");
-            board.initialAllocationOfExtraTroops(6);
-            board.printNodes();
+
             for (int i = 0; i < 1000; i++) {
                 if (i % 2 == 0) {
-                    System.out.println("Round " + (i + 1) + " ...\n");
+                    System.out.println("\nRound " + (i + 1) + " ...\n");
                     System.out.println("A\'s turn:\n");
-                    board.nextMove("A");
+                    // nextMove("A");
+                    countryGraph = MinimalRisk.allocationOfExtraTroops(countryGraph, "A", 2);
+                    countryGraph = MinimalRisk.attack(countryGraph, "A");
+                    countryGraph = MinimalRisk.moveTroops(countryGraph, "A");
                 } else {
-                    System.out.println("B\'s turn:\n");
-                    board.nextMove("B");
+                    System.out.println("\nB\'s turn:\n");
+                    // nextMove("B");
+                    countryGraph = MinimalRisk.allocationOfExtraTroops(countryGraph, "B", 2);
+                    countryGraph = MinimalRisk.attack(countryGraph, "B");
+                    countryGraph = MinimalRisk.moveTroops(countryGraph, "B");
                 }
-                board.printNodes();
-                if (board.gameOver()) {
-                    System.out.println("GAME OVER!\n");
+                System.out.println(countryGraph);
+                if (MinimalRisk.gameOver(countryGraph)) {
+                    System.out.println("\nGAME OVER!\n");
                     break;
                 }
             }
-            */
         } catch(Exception e) {
             e.printStackTrace();
             System.out.println();
-            
         }
     }
 
