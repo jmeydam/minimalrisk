@@ -74,8 +74,7 @@ public class MinimalRisk {
     */
     public static String possibleTargetCountries(String countryGraphJSON, String attackingPlayer, String attackingCountry) {
         Board board = new Board(countryGraphJSON);
-        // TODO
-        ArrayList<Node> possibleTargetCountries = board.possibleTargetCountries(attackingPlayer);
+        ArrayList<Node> possibleTargetCountries = board.possibleTargetCountries(attackingPlayer, board.getNode(attackingCountry));
         return Board.getCountryListJSON(possibleTargetCountries);
     }
 
@@ -112,8 +111,7 @@ public class MinimalRisk {
     */
     public static String possibleDestinations(String countryGraphJSON, String player, String sourceCountry) {
         Board board = new Board(countryGraphJSON);
-        // TODO
-        ArrayList<Node> possibleDestinations = board.possibleDestinations(player);
+        ArrayList<Node> possibleDestinations = board.possibleDestinations(player, sourceCountry);
         return Board.getCountryListJSON(possibleDestinations);
     }
 
@@ -131,8 +129,7 @@ public class MinimalRisk {
     */
     public static String possibleSources(String countryGraphJSON, String player, String destinationCountry) {
         Board board = new Board(countryGraphJSON);
-        // TODO
-        ArrayList<Node> possibleSources = board.possibleSources(player);
+        ArrayList<Node> possibleSources = board.possibleSources(player, destinationCountry);
         return Board.getCountryListJSON(possibleSources);
     }
 
