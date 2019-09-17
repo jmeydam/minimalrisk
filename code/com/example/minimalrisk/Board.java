@@ -7,11 +7,6 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.ArrayList;
 import java.util.Random;
-import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.FileSystems;
-import java.nio.file.Path;
-import java.nio.charset.StandardCharsets;
 import com.google.gson.Gson;
 
 class Board {
@@ -30,16 +25,6 @@ class Board {
         for (GsonTemplateBidirectionalLink link : countryGraphObject.bidirectionalLinks) {
             this.g.addEdge(new Edge(this.g.getNode(link.fromCountry), this.g.getNode(link.toCountry)));
         }
-    }
-
-    Board() throws IOException {
-        this(countryGraphStringExample());
-    }
-
-    static String countryGraphStringExample() throws IOException {
-        Path path = FileSystems.getDefault().getPath("country_graph_init.json");
-        String countryGraphString = Files.readString(path, StandardCharsets.UTF_8);
-        return countryGraphString;
     }
 
     static String getCountryListJSON(ArrayList<Node> nodes) {
@@ -265,14 +250,14 @@ class Board {
     }
 
     void printNodes() {
-        // System.out.println("\nNodes:\n");
+        System.out.println("\nNodes:\n");
         Set<Node> nodes = this.g.getAllNodes();
         List<Node> nodeList = new ArrayList<>(nodes);
         Collections.sort(nodeList);
         for (Node node : nodeList) {
-            // System.out.println(node);
+            System.out.println(node);
         }
-        // System.out.println("\n");
+        System.out.println("\n");
     }
 
 }

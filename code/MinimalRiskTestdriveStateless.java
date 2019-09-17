@@ -9,7 +9,7 @@ public class MinimalRiskTestdriveStateless {
 
     public static void main(String[] args) {
         try {
-            String initConfigFile = "country_graph_init.json";
+            String initConfigFile = "country_graph_example.json";
 
             System.out.println("Reading " + initConfigFile);
             Path path = FileSystems.getDefault().getPath(initConfigFile);
@@ -29,7 +29,7 @@ public class MinimalRiskTestdriveStateless {
 
             for (int i = 0; i < 1000; i++) {
                 if (i % 2 == 0) {
-                    System.out.println("\nRound " + (i + 1) + " ...\n");
+                    System.out.println("\nRound " + (i / 2 + 1) + " ...\n");
                     System.out.println("A\'s turn:\n");
                     // nextMove("A");
                     countryGraph = MinimalRisk.allocationOfExtraTroops(countryGraph, "A", 2);

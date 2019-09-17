@@ -13,7 +13,7 @@ class GsonTest {
 
         System.out.println("\n------------- Country graph -------------\n");
 
-        Path path = FileSystems.getDefault().getPath("country_graph_init.json");
+        Path path = FileSystems.getDefault().getPath("country_graph_example.json");
         String countryGraphString = Files.readString(path, StandardCharsets.UTF_8);
         Gson gson = new Gson();
         GsonTemplateCountryGraph countryGraphObject = gson.fromJson(countryGraphString, GsonTemplateCountryGraph.class);
