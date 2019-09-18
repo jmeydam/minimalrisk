@@ -1,12 +1,12 @@
 package com.example.minimalrisk;
 
-import java.util.Objects;
+import java.util.ArrayList;
 import java.util.Collections;
-import java.util.Set;
 import java.util.HashSet;
 import java.util.List;
-import java.util.ArrayList;
+import java.util.Objects;
 import java.util.Random;
+import java.util.Set;
 import com.google.gson.Gson;
 
 class Board {
@@ -52,28 +52,24 @@ class Board {
         return gson.toJson(countryGraphObject);
     }
 
-    void resetModified() {
+    String nodesSummary() {
+        StringBuilder sb = new StringBuilder();
+        sb.append("Nodes:\n\n");
         Set<Node> nodes = this.g.getAllNodes();
-        for (Node node : nodes) {
-            node.resetModified();
+        List<Node> nodeList = new ArrayList<>(nodes);
+        Collections.sort(nodeList);
+        for (Node node : nodeList) {
+            sb.append(node + "\n");
         }
+        return sb.toString();
     }
 
-    boolean gameOver() {
-        // System.out.println("game over?");
-        Set<String> nodeGroups = this.g.getAllNodeGroups();
-        Set<String> players =  this.g.getAllPlayers(); 
-        // System.out.println("node groups: " + nodeGroups);
-        // System.out.println("players: " + players);
-        for (String nodeGroup : nodeGroups) {
-            for (String player : players) {
-                // System.out.println("node count " + nodeGroup + ", " + player + ": " + this.g.nodeCount(nodeGroup, player));
-                if (this.g.nodeCount(nodeGroup, player) == 0) {
-                    return true;
-                }
-            }
-        }
-        return false;
+    Node getNode(String name) {
+        return this.g.getNode(name);
+    }
+
+    ArrayList<Node> shortestPath(Node from, Node to, String player) {
+        return this.g.shortestPath(from, to, player);
     }
 
     void initialAllocationOfCountries(String playerA, String playerB) {
@@ -99,7 +95,6 @@ class Board {
     }
 
     void allocationOfExtraTroops(String player, int extraTroops) {
-        // System.out.println("allocating " + extraTroops + " troops to " + player);
         Random randomGenerator = new Random();
         Set<Node> nodes = this.g.getAllNodes();
         ArrayList<Node> nodesPlayer = new ArrayList<>();
@@ -112,9 +107,7 @@ class Board {
             for (int i = 0; i < extraTroops; i++) {
                 int randomIndex = randomGenerator.nextInt(nodesPlayer.size());
                 Node node = nodesPlayer.get(randomIndex);
-                // System.out.println("old count node " + node.getName() + ": " + node.getCount());
                 node.incrementCount();
-                // System.out.println("new count node " + node.getName() + ": " + node.getCount());
             }
         }
     }
@@ -129,9 +122,7 @@ class Board {
     ArrayList<Node> possibleAttackingCountries(String attackingPlayer, Node targetCountry) {
         ArrayList<Node> possibleAttackingCountries = new ArrayList<>(); 
         HashSet<Node> neighbors = this.g.childrenOf(targetCountry);
-        // System.out.println("neighbors of target country " + targetCountry + ": " + neighbors);
         for (Node neighbor : neighbors) {
-            // System.out.println("Objects.equals(neighbor.getPlayer(), attackingPlayer): " + Objects.equals(neighbor.getPlayer(), attackingPlayer));
             if (Objects.equals(neighbor.getPlayer(), attackingPlayer) && neighbor.getCount() > 1) {
                 possibleAttackingCountries.add(neighbor);
             }
@@ -148,7 +139,6 @@ class Board {
                 enemyCountries.add(node);
             }
         }
-        // System.out.println("possibe target countries, candidates: " + enemyCountries);
         for (Node enemyCountry : enemyCountries) {
             ArrayList<Node> possibleAttackingCountries = possibleAttackingCountries(attackingPlayer, enemyCountry);
             if (possibleAttackingCountries.size() > 0) {
@@ -162,7 +152,7 @@ class Board {
         ArrayList<Node> possibleTargetCountries = new ArrayList<>(); 
         ArrayList<Node> candidateCountries = possibleTargetCountries(attackingPlayer);
         for (Node candidateCountry : candidateCountries) {
-            if (this.g.shortestPath(attackingCountry, candidateCountry, attackingPlayer).size() > 0) {
+            if (shortestPath(attackingCountry, candidateCountry, attackingPlayer).size() > 0) {
                 possibleTargetCountries.add(candidateCountry);
             }
         }
@@ -170,7 +160,6 @@ class Board {
     }
 
     void battle(Node attackingCountry, Node targetCountry) {
-        // System.out.println("battle: " + attackingCountry.getName() + " is attacking " + targetCountry.getName());
         Random randomGenerator = new Random();
         attackingCountry.setCount(1);
         // later different counts possible
@@ -184,21 +173,15 @@ class Board {
     }
 
     void attack(String attackingPlayer) {
-        // System.out.println(attackingPlayer + " attacking");
         Random randomGenerator = new Random();
         ArrayList<Node> possibleTargetCountries = possibleTargetCountries(attackingPlayer);
-        // System.out.println("possible target countries: " + possibleTargetCountries);
         if (possibleTargetCountries.size() > 0) {
             int randomIndex = randomGenerator.nextInt(possibleTargetCountries.size());
             Node targetCountry = possibleTargetCountries.get(randomIndex);
-            // System.out.println("target country: " + targetCountry);
             ArrayList<Node> possibleAttackingCountries = possibleAttackingCountries(attackingPlayer, targetCountry);
-            // System.out.println("possible attacking countries for target country " + targetCountry + ": " + possibleAttackingCountries);
             if (possibleAttackingCountries.size() > 0)  {
                 randomIndex = randomGenerator.nextInt(possibleAttackingCountries.size());
                 Node attackingCountry = possibleAttackingCountries.get(randomIndex);
-                // System.out.println("attacking country: " + attackingCountry);
-                // System.out.println("battle " + attackingCountry + " against " + targetCountry);
                 battle(attackingCountry, targetCountry);
             }
         }
@@ -215,11 +198,11 @@ class Board {
         return possibleSources;
     }
 
-    ArrayList<Node> possibleSources(String player, String destination) {
+    ArrayList<Node> possibleSources(String player, Node destination) {
         ArrayList<Node> possibleSources = new ArrayList<>(); 
         ArrayList<Node> candidates = possibleSources(player);
         for (Node candidate : candidates) {
-            if (this.g.shortestPath(candidate, getNode(destination), player).size() > 0) {
+            if (shortestPath(candidate, destination, player).size() > 0) {
                 possibleSources.add(candidate);
             }
         }
@@ -237,11 +220,11 @@ class Board {
         return possibleDestinations;
     }
 
-    ArrayList<Node> possibleDestinations(String player, String source) {
+    ArrayList<Node> possibleDestinations(String player, Node source) {
         ArrayList<Node> possibleDestinations = new ArrayList<>() ;
         ArrayList<Node> candidates = possibleDestinations(player);
         for (Node candidate : candidates) {
-            if (this.g.shortestPath(getNode(source), candidate, player).size() > 0) {
+            if (shortestPath(source, candidate, player).size() > 0) {
                 possibleDestinations.add(candidate);
             }
         }
@@ -255,7 +238,7 @@ class Board {
             for (Node possibleSource : possibleSources) {
                 for (Node possibleDestination : possibleDestinations) {
                     if (possibleDestination != possibleSource
-                        && this.g.shortestPath(possibleSource, possibleDestination, player).size() > 0) {
+                        && shortestPath(possibleSource, possibleDestination, player).size() > 0) {
                         possibleDestination.setCount(possibleDestination.getCount() + possibleSource.getCount() - 1);
                         possibleSource.setCount(1);
                         return;
@@ -271,25 +254,24 @@ class Board {
         moveTroops(player);
     }
 
-    ArrayList<Node> shortestPath(String fromName, String toName, String player) {
-        Node fromNode = this.g.getNode(fromName);
-        Node toNode = this.g.getNode(toName);
-        return this.g.shortestPath(fromNode, toNode, player);
-    }
-
-    Node getNode(String name) {
-        return this.g.getNode(name);
-    }
-
-    void printNodes() {
-        System.out.println("\nNodes:\n");
+    void resetModified() {
         Set<Node> nodes = this.g.getAllNodes();
-        List<Node> nodeList = new ArrayList<>(nodes);
-        Collections.sort(nodeList);
-        for (Node node : nodeList) {
-            System.out.println(node);
+        for (Node node : nodes) {
+            node.resetModified();
         }
-        System.out.println("\n");
+    }
+
+    boolean gameOver() {
+        Set<String> nodeGroups = this.g.getAllNodeGroups();
+        Set<String> players =  this.g.getAllPlayers(); 
+        for (String nodeGroup : nodeGroups) {
+            for (String player : players) {
+                if (this.g.nodeCount(nodeGroup, player) == 0) {
+                    return true;
+                }
+            }
+        }
+        return false;
     }
 
 }

@@ -1,10 +1,10 @@
 package com.example.minimalrisk;
 
-import java.util.Objects;
-import java.util.Set;
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Map;
-import java.util.HashMap;
+import java.util.Objects;
+import java.util.Set;
 
 class DirectedGraph {
 

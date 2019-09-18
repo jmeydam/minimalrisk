@@ -1,10 +1,10 @@
 package com.example.minimalrisk;
 
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.LinkedList;
 import java.util.Objects;
 import java.util.Set;
-import java.util.HashSet;
-import java.util.ArrayList;
-import java.util.LinkedList;
 
 class Graph extends DirectedGraph {
 

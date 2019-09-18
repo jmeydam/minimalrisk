@@ -1,9 +1,9 @@
-import com.google.gson.Gson;
 import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.FileSystems;
-import java.nio.file.Path;
 import java.nio.charset.StandardCharsets;
+import java.nio.file.FileSystems;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import com.google.gson.Gson;
 import com.example.minimalrisk.GsonTemplateCountryGraph;
 import com.example.minimalrisk.GsonTemplateCountryList;
 
@@ -22,13 +22,13 @@ class GsonTest {
 
         System.out.println("\n------------- Country list -------------\n");
 
-        System.out.println("Gson with json from file:");
         Path path2 = FileSystems.getDefault().getPath("country_list_example.json");
         String countryListString = Files.readString(path2, StandardCharsets.UTF_8);
         Gson gson2 = new Gson();
         GsonTemplateCountryList countryListObject = gson2.fromJson(countryListString, GsonTemplateCountryList.class);
         String json2 = gson2.toJson(countryListObject);
         System.out.println(json2);
+        System.out.println();
 
     }
 

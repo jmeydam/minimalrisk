@@ -111,7 +111,7 @@ public class MinimalRisk {
     */
     public static String possibleDestinations(String countryGraphJSON, String player, String sourceCountry) {
         Board board = new Board(countryGraphJSON);
-        ArrayList<Node> possibleDestinations = board.possibleDestinations(player, sourceCountry);
+        ArrayList<Node> possibleDestinations = board.possibleDestinations(player, board.getNode(sourceCountry));
         return Board.getCountryListJSON(possibleDestinations);
     }
 
@@ -129,7 +129,7 @@ public class MinimalRisk {
     */
     public static String possibleSources(String countryGraphJSON, String player, String destinationCountry) {
         Board board = new Board(countryGraphJSON);
-        ArrayList<Node> possibleSources = board.possibleSources(player, destinationCountry);
+        ArrayList<Node> possibleSources = board.possibleSources(player, board.getNode(destinationCountry));
         return Board.getCountryListJSON(possibleSources);
     }
 
@@ -138,7 +138,7 @@ public class MinimalRisk {
     */
     public static String shortestPath(String countryGraphJSON, String player, String sourceCountry, String destinationCountry) {
         Board board = new Board(countryGraphJSON);
-        ArrayList<Node> shortestPath = board.shortestPath(sourceCountry, destinationCountry, player);
+        ArrayList<Node> shortestPath = board.shortestPath(board.getNode(sourceCountry), board.getNode(destinationCountry), player);
         return Board.getCountryListJSON(shortestPath);
     }
 

@@ -1,10 +1,10 @@
 package com.example.minimalrisk;
 
 import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.FileSystems;
-import java.nio.file.Path;
 import java.nio.charset.StandardCharsets;
+import java.nio.file.FileSystems;
+import java.nio.file.Files;
+import java.nio.file.Path;
 
 public class MinimalRiskTestdriveStateful {
 
@@ -20,19 +20,19 @@ public class MinimalRiskTestdriveStateful {
         try {
             board = new Board(MinimalRiskTestdriveStateful.countryGraphStringExample());
             board.initialAllocationOfCountries("A", "B");
-            System.out.println("\nInitial allocation of extra troops ...\n");
+            System.out.println("Initial allocation of extra troops ...");
             board.initialAllocationOfExtraTroops(6);
-            board.printNodes();
+            System.out.println(board.nodesSummary());
             for (int i = 0; i < 1000; i++) {
                 if (i % 2 == 0) {
-                    System.out.println("\nRound " + (i / 2 + 1) + " ...\n\n");
-                    System.out.println("A\'s turn:");
+                    System.out.println("Round " + (i / 2 + 1) + " ...\n");
+                    System.out.println("A\'s turn\n");
                     board.nextMove("A");
                 } else {
-                    System.out.println("B\'s turn:");
+                    System.out.println("B\'s turn\n");
                     board.nextMove("B");
                 }
-                board.printNodes();
+                System.out.println(board.nodesSummary());
                 if (board.gameOver()) {
                     System.out.println("GAME OVER!\n");
                     break;
