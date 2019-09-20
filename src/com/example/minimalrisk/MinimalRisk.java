@@ -12,9 +12,9 @@ import java.util.ArrayList;
  * as their first parameter the current state of the board in form of a JSON string and that return one of the following: 
  * </p>
  * <ul>
- *   <li>A JSON string representing the next state of the board,</li>
- *   <li>A JSON string representing a list of countries, or</li>
- *   <li>A boolean.</li>
+ *   <li>A JSON string representing the next state of the board</li>
+ *   <li>A JSON string representing a list of countries</li>
+ *   <li>A boolean</li>
  * </ul>
  * <p>
  * As all methods are static and no object state is maintained between subsequent method calls this class
