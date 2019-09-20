@@ -21,7 +21,7 @@ import java.util.ArrayList;
  * can serve as the basis for a simple stateless web API. 
  * </p>
  * <p>
- * The implementation of the graph model and the breadth-first search are based on Python code presented in 
+ * The implementation of the graph model and breadth-first search are based on Python code presented in 
  * <a href="https://www.edx.org/course/6-00-2x-introduction-to-computational-thinking-and-data-science-3">MITx - 6.00.2x</a>.
  * </p>
  */
