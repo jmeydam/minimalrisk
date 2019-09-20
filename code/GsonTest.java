@@ -7,6 +7,9 @@ import com.google.gson.Gson;
 import com.example.minimalrisk.GsonTemplateCountryGraph;
 import com.example.minimalrisk.GsonTemplateCountryList;
 
+/**
+ * Example for the use of the Gson template classes. 
+ */
 class GsonTest {
 
     public static void main(String[] args) throws IOException {

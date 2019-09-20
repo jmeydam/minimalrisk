@@ -6,6 +6,9 @@ import java.nio.file.FileSystems;
 import java.nio.file.Files;
 import java.nio.file.Path;
 
+/**
+ * Example for the use of the implementation classes. Can be adapted for tests.
+ */
 public class MinimalRiskTestdriveStateful {
 
     static String countryGraphStringExample() throws IOException {

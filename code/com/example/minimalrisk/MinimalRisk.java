@@ -2,10 +2,35 @@ package com.example.minimalrisk;
 
 import java.util.ArrayList;
 
+/** 
+ * Implementation of a simplified version of the game <a href="https://en.wikipedia.org/wiki/Risk_(game)">Risk</a>. 
+ * The moves are currently random possible moves.</br></br>
+ *
+ * The {@code MinimalRisk} class provides the API for the game logic, consisting exclusively of static 
+ * methods that accept as their first parameter a JSON string representing the current state of the board
+ * (the "country graph") and that return one of the following: 
+ *
+ * <ol>
+ *   <li>A JSON string representing the next state of the board,</li>
+ *   <li>A JSON string representing a list of countries, or</li>
+ *   <li>(in one case) a boolean.</li>
+ * </ol>
+ *
+ * As all methods are static and no object state is maintained between subsequent method calls this class
+ * can serve as a basis for a simple stateless web API. Note however that the methods are not all pure 
+ * functions, as the output may depend on a random number generator. <\br><\br>
+ * 
+ * The implementation of the graph model and the breadth-first search are based on Python code presented in 
+ * <a href="https://www.edx.org/course/6-00-2x-introduction-to-computational-thinking-and-data-science-3">MITx - 6.00.2x</a>.
+ */
 public class MinimalRisk {
 
     /**
-     * @return String with JSON representation of country graph (same structure as parameter countryGraphJSON)
+     * Random allocation of countries to players.
+     * @param countryGraphJSON JSON string representing the current state of the board
+     * @param playerA Name of player A
+     * @param playerB Name of player B
+     * @return JSON string representing the next state of the board (same structure as parameter {@code countryGraphJSON})
      */
     public static String initialAllocationOfCountries(String countryGraphJSON, String playerA, String playerB) {
         Board board = new Board(countryGraphJSON);
@@ -14,7 +39,10 @@ public class MinimalRisk {
     }
 
     /**
-     * @return String with JSON representation of country graph (same structure as parameter countryGraphJSON)
+     * Random allocation of extra troops before the proper game begins.
+     * @param countryGraphJSON JSON string representing the current state of the board
+     * @param extraTroopsEach Number of extra troops for each player
+     * @return JSON string representing the next state of the board (same structure as parameter {@code countryGraphJSON})
      */
     public static String initialAllocationOfExtraTroops(String countryGraphJSON, int extraTroopsEach) {
         Board board = new Board(countryGraphJSON);
@@ -23,8 +51,12 @@ public class MinimalRisk {
     }
 
     /**
-    * @return String with JSON representation of country graph (same structure as parameter countryGraphJSON)
-    */
+     * Random allocation of extra troops.
+     * @param countryGraphJSON JSON string representing the current state of the board
+     * @param player Player receiving extra troops
+     * @param extraTroops Number of extra troops to be allocated
+     * @return JSON string representing the next state of the board (same structure as parameter {@code countryGraphJSON})
+     */
     public static String allocationOfExtraTroops(String countryGraphJSON, String player, int extraTroops) {
         Board board = new Board(countryGraphJSON);
         board.resetModified();
@@ -33,8 +65,11 @@ public class MinimalRisk {
     }
 
     /**
-    * @return String with JSON representation of country graph (same structure as parameter countryGraphJSON)
-    */
+     * Random attack by player.
+     * @param countryGraphJSON JSON string representing the current state of the board
+     * @param attackingPlayer Attacking player
+     * @return JSON string representing the next state of the board (same structure as parameter {@code countryGraphJSON})
+     */
     public static String attack(String countryGraphJSON, String attackingPlayer) {
         Board board = new Board(countryGraphJSON);
         board.resetModified();
@@ -43,8 +78,11 @@ public class MinimalRisk {
     }
 
     /**
-    * @return String with JSON representation of country graph (same structure as parameter countryGraphJSON)
-    */
+     * Randomly moving troops.
+     * @param countryGraphJSON JSON string representing the current state of the board
+     * @param player Player moving troops
+     * @return JSON string representing the next state of the board (same structure as parameter {@code countryGraphJSON})
+     */
     public static String moveTroops(String countryGraphJSON, String player) {
         Board board = new Board(countryGraphJSON);
         board.resetModified();
@@ -53,16 +91,21 @@ public class MinimalRisk {
     }
     
     /**
-    * @return true if one player has captured a whole continent
-    */
+     * Determines whether a game is over. Implemented rule: a game is over when on player controls an entire continent (country group).
+     * @param countryGraphJSON JSON string representing the current state of the board
+     * @return true if one player controls a whole continent
+     */
     public static boolean gameOver(String countryGraphJSON) {
         Board board = new Board(countryGraphJSON);
         return board.gameOver();
     }
 
     /**
-    * @return String with JSON representation of list of countries
-    */
+     * Determines possible target countries for an attack by player {@code attackingPlayer}.
+     * @param countryGraphJSON JSON string representing the current state of the board
+     * @param attackingPlayer Attacking player
+     * @return JSON string representing a list of countries
+     */
     public static String possibleTargetCountries(String countryGraphJSON, String attackingPlayer) {
         Board board = new Board(countryGraphJSON);
         ArrayList<Node> possibleTargetCountries = board.possibleTargetCountries(attackingPlayer);
@@ -70,8 +113,12 @@ public class MinimalRisk {
     }
 
     /**
-    * @return String with JSON representation of list of countries
-    */
+     * Determines possible target countries for an attack by player {@code attackingPlayer} from country {@code attackingCountry}.
+     * @param countryGraphJSON JSON string representing the current state of the board
+     * @param attackingPlayer Attacking player
+     * @param attackingCountry Country the attack is to be launched from
+     * @return JSON string representing a list of countries
+     */
     public static String possibleTargetCountries(String countryGraphJSON, String attackingPlayer, String attackingCountry) {
         Board board = new Board(countryGraphJSON);
         ArrayList<Node> possibleTargetCountries = board.possibleTargetCountries(attackingPlayer, board.getNode(attackingCountry));
@@ -79,8 +126,12 @@ public class MinimalRisk {
     }
 
     /**
-    * @return String with JSON representation of list of countries
-    */
+     * Determines possible attacking countries for an attack by player {@code attackingPlayer} on country {@code targetCountry}.
+     * @param countryGraphJSON JSON string representing the current state of the board
+     * @param attackingPlayer Attacking player
+     * @param targetCountry Country to be attacked
+     * @return JSON string representing a list of countries
+     */
     public static String possibleAttackingCountries(String countryGraphJSON, String attackingPlayer, String targetCountry) {
         Board board = new Board(countryGraphJSON);
         ArrayList<Node> possibleAttackingCountries = board.possibleAttackingCountries(attackingPlayer, board.getNode(targetCountry));
@@ -88,8 +139,12 @@ public class MinimalRisk {
     }
 
     /**
-    * @return String with JSON representation of country graph (same structure as parameter countryGraphJSON)
-    */
+     * Simulates a battle between {@code attackingCountry} and {@code targetCountry}, with random outcome. 
+     * @param countryGraphJSON JSON string representing the current state of the board
+     * @param attackingCountry Attacking country
+     * @param targetCountry Country to be attacked
+     * @return JSON string representing the next state of the board (same structure as parameter {@code countryGraphJSON})
+     */
     public static String battle(String countryGraphJSON, String attackingCountry, String targetCountry) {
         Board board = new Board(countryGraphJSON);
         board.resetModified();
@@ -98,8 +153,11 @@ public class MinimalRisk {
     }
 
     /**
-    * @return String with JSON representation of list of countries
-    */
+     * Determines countries that are possible destinations for the movement of troops belonging to {@code player}.
+     * @param countryGraphJSON JSON string representing the current state of the board
+     * @param player Player whose troops are to be moved
+     * @return JSON string representing a list of countries
+     */
     public static String possibleDestinations(String countryGraphJSON, String player) {
         Board board = new Board(countryGraphJSON);
         ArrayList<Node> possibleDestinations = board.possibleDestinations(player);
@@ -107,8 +165,12 @@ public class MinimalRisk {
     }
 
     /**
-    * @return String with JSON representation of list of countries
-    */
+     * Determines countries that are possible destinations for the movement of troops belonging to {@code player}, given a source country {@code sourceCountry}.
+     * @param countryGraphJSON JSON string representing the current state of the board
+     * @param player Player whose troops are to be moved
+     * @param sourceCountry Country troops are to be moved from
+     * @return JSON string representing a list of countries
+     */
     public static String possibleDestinations(String countryGraphJSON, String player, String sourceCountry) {
         Board board = new Board(countryGraphJSON);
         ArrayList<Node> possibleDestinations = board.possibleDestinations(player, board.getNode(sourceCountry));
@@ -116,8 +178,11 @@ public class MinimalRisk {
     }
 
     /**
-    * @return String with JSON representation of list of countries
-    */
+     * Determines countries that are possible starting points for the movement of troops belonging to {@code player}.
+     * @param countryGraphJSON JSON string representing the current state of the board
+     * @param player Player whose troops are to be moved
+     * @return JSON string representing a list of countries
+     */
     public static String possibleSources(String countryGraphJSON, String player) {
         Board board = new Board(countryGraphJSON);
         ArrayList<Node> possibleSources = board.possibleSources(player);
@@ -125,8 +190,12 @@ public class MinimalRisk {
     }
 
     /**
-    * @return String with JSON representation of list of countries
-    */
+     * Determines countries that are possible starting points for the movement of troops belonging to {@code player}, given a destination {@code destinationCountry}.
+     * @param countryGraphJSON JSON string representing the current state of the board
+     * @param player Player whose troops are to be moved
+     * @param destinationCountry Country troops are to be moved to
+     * @return JSON string representing a list of countries
+     */
     public static String possibleSources(String countryGraphJSON, String player, String destinationCountry) {
         Board board = new Board(countryGraphJSON);
         ArrayList<Node> possibleSources = board.possibleSources(player, board.getNode(destinationCountry));
@@ -134,8 +203,13 @@ public class MinimalRisk {
     }
 
     /**
-    * @return String with JSON representation of list of countries
-    */
+     * Determines a list of countries that form the shortest path for the movement of troops belonging to {@code player} 
+     * from a {@code sourceCountry} to a {@code destinationCountry}.
+     * If there are several paths with the shortest possible length, the one that is found first is returned.
+     * @param countryGraphJSON JSON string representing the current state of the board
+     * @param player Player receiving extra troops
+     * @return JSON string representing a list of countries
+     */
     public static String shortestPath(String countryGraphJSON, String player, String sourceCountry, String destinationCountry) {
         Board board = new Board(countryGraphJSON);
         ArrayList<Node> shortestPath = board.shortestPath(board.getNode(sourceCountry), board.getNode(destinationCountry), player);

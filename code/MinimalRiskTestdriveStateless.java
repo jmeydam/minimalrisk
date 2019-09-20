@@ -5,6 +5,9 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import com.example.minimalrisk.MinimalRisk;
 
+/**
+ * Example for the use of the MinimalRisk API. 
+ */
 public class MinimalRiskTestdriveStateless {
 
     public static void main(String[] args) {
