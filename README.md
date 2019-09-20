@@ -8,7 +8,7 @@ The MinimalRisk class provides an API consisting exclusively of static methods t
 as their first parameter the current state of the board in form of a JSON string and that return one of the following: 
 
 * A JSON string representing the next state of the board (example: json/country_graph_example.json)
-* A JSON string representing a list of countries (example: country_list_example.json)
+* A JSON string representing a list of countries (example: json/country_list_example.json)
 * A boolean
 
 As all methods are static and no object state is maintained between subsequent method calls this class
