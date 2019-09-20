@@ -12,7 +12,7 @@ import java.nio.file.Path;
 public class MinimalRiskTestdriveStateful {
 
     static String countryGraphStringExample() throws IOException {
-        Path path = FileSystems.getDefault().getPath("country_graph_example.json");
+        Path path = FileSystems.getDefault().getPath("json/country_graph_example.json");
         String countryGraphString = Files.readString(path, StandardCharsets.UTF_8);
         return countryGraphString;
     }

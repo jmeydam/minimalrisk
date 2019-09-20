@@ -12,7 +12,7 @@ public class MinimalRiskTestdriveStateless {
 
     public static void main(String[] args) {
         try {
-            String initConfigFile = "country_graph_example.json";
+            String initConfigFile = "json/country_graph_example.json";
 
             System.out.println("Reading " + initConfigFile);
             Path path = FileSystems.getDefault().getPath(initConfigFile);

@@ -16,7 +16,7 @@ class GsonTest {
 
         System.out.println("\n------------- Country graph -------------\n");
 
-        Path path = FileSystems.getDefault().getPath("country_graph_example.json");
+        Path path = FileSystems.getDefault().getPath("json/country_graph_example.json");
         String countryGraphString = Files.readString(path, StandardCharsets.UTF_8);
         Gson gson = new Gson();
         GsonTemplateCountryGraph countryGraphObject = gson.fromJson(countryGraphString, GsonTemplateCountryGraph.class);
@@ -25,7 +25,7 @@ class GsonTest {
 
         System.out.println("\n------------- Country list -------------\n");
 
-        Path path2 = FileSystems.getDefault().getPath("country_list_example.json");
+        Path path2 = FileSystems.getDefault().getPath("json/country_list_example.json");
         String countryListString = Files.readString(path2, StandardCharsets.UTF_8);
         Gson gson2 = new Gson();
         GsonTemplateCountryList countryListObject = gson2.fromJson(countryListString, GsonTemplateCountryList.class);

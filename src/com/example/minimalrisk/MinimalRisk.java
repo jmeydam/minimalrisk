@@ -3,25 +3,27 @@ package com.example.minimalrisk;
 import java.util.ArrayList;
 
 /** 
- * Implementation of a simplified version of the game <a href="https://en.wikipedia.org/wiki/Risk_(game)">Risk</a>. 
- * The moves are currently random possible moves.</br></br>
- *
- * The {@code MinimalRisk} class provides the API for the game logic, consisting exclusively of static 
- * methods that accept as their first parameter a JSON string representing the current state of the board
- * (the "country graph") and that return one of the following: 
- *
- * <ol>
+ * <p>
+ * This package implements a simplified version of the game <a href="https://en.wikipedia.org/wiki/Risk_(game)">Risk</a>. 
+ * The moves are random possible moves and are not optimized in any way.
+ * </p>
+ * <p>
+ * The {@code MinimalRisk} class provides an API consisting exclusively of static methods that accept 
+ * as their first parameter the current state of the board in form of a JSON string and that return one of the following: 
+ * </p>
+ * <ul>
  *   <li>A JSON string representing the next state of the board,</li>
  *   <li>A JSON string representing a list of countries, or</li>
- *   <li>(in one case) a boolean.</li>
- * </ol>
- *
+ *   <li>A boolean.</li>
+ * </ul>
+ * <p>
  * As all methods are static and no object state is maintained between subsequent method calls this class
- * can serve as a basis for a simple stateless web API. Note however that the methods are not all pure 
- * functions, as the output may depend on a random number generator. <\br><\br>
- * 
+ * can serve as the basis for a simple stateless web API. 
+ * </p>
+ * <p>
  * The implementation of the graph model and the breadth-first search are based on Python code presented in 
  * <a href="https://www.edx.org/course/6-00-2x-introduction-to-computational-thinking-and-data-science-3">MITx - 6.00.2x</a>.
+ * </p>
  */
 public class MinimalRisk {
 
@@ -168,7 +170,7 @@ public class MinimalRisk {
      * Determines countries that are possible destinations for the movement of troops belonging to {@code player}, given a source country {@code sourceCountry}.
      * @param countryGraphJSON JSON string representing the current state of the board
      * @param player Player whose troops are to be moved
-     * @param sourceCountry Country troops are to be moved from
+     * @param sourceCountry Country that troops are to be moved from
      * @return JSON string representing a list of countries
      */
     public static String possibleDestinations(String countryGraphJSON, String player, String sourceCountry) {
@@ -193,7 +195,7 @@ public class MinimalRisk {
      * Determines countries that are possible starting points for the movement of troops belonging to {@code player}, given a destination {@code destinationCountry}.
      * @param countryGraphJSON JSON string representing the current state of the board
      * @param player Player whose troops are to be moved
-     * @param destinationCountry Country troops are to be moved to
+     * @param destinationCountry Country that troops are to be moved to
      * @return JSON string representing a list of countries
      */
     public static String possibleSources(String countryGraphJSON, String player, String destinationCountry) {
@@ -208,6 +210,8 @@ public class MinimalRisk {
      * If there are several paths with the shortest possible length, the one that is found first is returned.
      * @param countryGraphJSON JSON string representing the current state of the board
      * @param player Player receiving extra troops
+     * @param sourceCountry Country that troops are to be moved from
+     * @param destinationCountry Country that troops are to be moved to
      * @return JSON string representing a list of countries
      */
     public static String shortestPath(String countryGraphJSON, String player, String sourceCountry, String destinationCountry) {
