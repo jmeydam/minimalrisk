@@ -160,16 +160,21 @@ class Board {
     }
 
     void battle(Node attackingCountry, Node targetCountry) {
-        Random randomGenerator = new Random();
-        attackingCountry.setCount(1);
-        // later different counts possible
-        targetCountry.setCount(1);
-        String[] players = {attackingCountry.getPlayer(), targetCountry.getPlayer()};
-        int randomIndex = randomGenerator.nextInt(players.length);
-        String winner = players[randomIndex];
-        if (Objects.equals(winner, attackingCountry.getPlayer())) {
-            targetCountry.setPlayer(winner);
+        // choose winner by drawing from urn, with each player 
+        // being represented in proportion to the number of troops
+        ArrayList<String> urn = new ArrayList<>();
+        for (int i = 0; i < attackingCountry.getCount(); i++) {
+            urn.add(attackingCountry.getPlayer());
         }
+        for (int i = 0; i < targetCountry.getCount(); i++) {
+            urn.add(targetCountry.getPlayer());
+        }
+        Collections.shuffle(urn);
+        String winner = urn.remove(0);
+        // simplification: always set both counts to 1
+        attackingCountry.setCount(1);
+        targetCountry.setCount(1);
+        targetCountry.setPlayer(winner);
     }
 
     void attack(String attackingPlayer) {
