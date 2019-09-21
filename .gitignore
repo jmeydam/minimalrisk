@@ -4,6 +4,9 @@
 # Vim
 *.swp
 
+# doc directory
+doc
+
 # Compiled class file
 *.class
 
