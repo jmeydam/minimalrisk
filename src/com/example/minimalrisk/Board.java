@@ -121,6 +121,9 @@ class Board {
 
     ArrayList<Node> possibleAttackingCountries(String attackingPlayer, Node targetCountry) {
         ArrayList<Node> possibleAttackingCountries = new ArrayList<>(); 
+        if (Objects.equals(targetCountry.getPlayer(), attackingPlayer)) {
+            return possibleAttackingCountries;
+        }
         HashSet<Node> neighbors = this.g.childrenOf(targetCountry);
         for (Node neighbor : neighbors) {
             if (Objects.equals(neighbor.getPlayer(), attackingPlayer) && neighbor.getCount() > 1) {
@@ -131,7 +134,6 @@ class Board {
     }
 
     ArrayList<Node> possibleTargetCountries(String attackingPlayer) {
-        ArrayList<Node> possibleTargetCountries = new ArrayList<>(); 
         ArrayList<Node> enemyCountries = new ArrayList<>(); 
         Set<Node> nodes = this.g.getAllNodes();
         for (Node node : nodes) {
@@ -139,6 +141,7 @@ class Board {
                 enemyCountries.add(node);
             }
         }
+        ArrayList<Node> possibleTargetCountries = new ArrayList<>(); 
         for (Node enemyCountry : enemyCountries) {
             ArrayList<Node> possibleAttackingCountries = possibleAttackingCountries(attackingPlayer, enemyCountry);
             if (possibleAttackingCountries.size() > 0) {
@@ -150,10 +153,13 @@ class Board {
 
     ArrayList<Node> possibleTargetCountries(String attackingPlayer, Node attackingCountry) {
         ArrayList<Node> possibleTargetCountries = new ArrayList<>(); 
-        ArrayList<Node> candidateCountries = possibleTargetCountries(attackingPlayer);
-        for (Node candidateCountry : candidateCountries) {
-            if (shortestPath(attackingCountry, candidateCountry, attackingPlayer).size() > 0) {
-                possibleTargetCountries.add(candidateCountry);
+        if (! (Objects.equals(attackingCountry.getPlayer(), attackingPlayer) && attackingCountry.getCount() > 1)) {
+            return possibleTargetCountries;
+        }
+        HashSet<Node> neighbors = this.g.childrenOf(attackingCountry);
+        for (Node neighbor : neighbors) {
+            if (! Objects.equals(neighbor.getPlayer(), attackingPlayer)) {
+                possibleTargetCountries.add(neighbor);
             }
         }
         return possibleTargetCountries;
