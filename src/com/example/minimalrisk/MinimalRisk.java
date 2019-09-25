@@ -48,7 +48,7 @@ public class MinimalRisk {
      */
     public static String initialAllocationOfExtraTroops(String countryGraphJSON, int extraTroopsEach) {
         Board board = new Board(countryGraphJSON);
-        board.initialAllocationOfExtraTroops(6);
+        board.initialAllocationOfExtraTroops(extraTroopsEach);
         return board.getCountryGraphJSON();
     }
 
@@ -62,7 +62,7 @@ public class MinimalRisk {
     public static String allocationOfExtraTroops(String countryGraphJSON, String player, int extraTroops) {
         Board board = new Board(countryGraphJSON);
         board.resetModified();
-        board.allocationOfExtraTroops(player, 2);
+        board.allocationOfExtraTroops(player, extraTroops);
         return board.getCountryGraphJSON();
     }
 
